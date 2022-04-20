@@ -12,11 +12,11 @@
         margin: 2em;
       }
     </style>
-    <script src="/tree-sitter.js"></script>
+    <script src="/tree-sitter-codeowners/tree-sitter.js"></script>
     <script type="module">
       await TreeSitter.init()
       const parser = new TreeSitter()
-      parser.setLanguage(await TreeSitter.Language.load("tree-sitter-CODEOWNERS.wasm"))
+      parser.setLanguage(await TreeSitter.Language.load("/tree-sitter-codeowners/tree-sitter-CODEOWNERS.wasm"))
 
       window.source.addEventListener('input', e => {
         const src = e.target.value
