@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        width: 100%;
+        height: 60vh;
+      }
+
+      .box {
+        flex: 1;
+        margin: 2em;
+      }
+    </style>
+    <script src="/tree-sitter.js"></script>
+    <script type="module">
+      await TreeSitter.init()
+      const parser = new TreeSitter()
+      parser.setLanguage(await TreeSitter.Language.load("tree-sitter-CODEOWNERS.wasm"))
+
+      window.source.addEventListener('input', e => {
+        const src = e.target.value
+        const parsed = parser.parse(src)
+        window.sink.value = parsed.rootNode.toString()
+      })
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <textarea id="source" class="box">Input goes here</textarea>
+      <textarea readonly id="sink" class="box">Output goes here</textarea>
+    </div>
+  </body>
+</html>
